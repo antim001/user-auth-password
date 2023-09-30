@@ -50,14 +50,27 @@ const Register = () => {
           <label className="label">
             <span className="label-text">Password</span>
           </label>
-          <input 
-          type={showPassword?"text":"password"}
-           placeholder="password"   name="password" className="input input-bordered" />
-           <span onClick={()=>setShowPassword(!showPassword)}>
-            {
-                showPassword?<FaRegEyeSlash></FaRegEyeSlash>:<FaRegEye></FaRegEye>
-            }
-           </span>
+          <div style={{ position: 'relative' }}>
+  <input
+    type={showPassword ? 'text' : 'password'}
+    placeholder="password"
+    name="password"
+    className="input input-bordered"
+  />
+  <span
+    onClick={() => setShowPassword(!showPassword)}
+    style={{
+      position: 'absolute',
+      top: '50%',
+      right: '10px', // Adjust this value to position the icon as needed
+      transform: 'translateY(-50%)',
+      cursor: 'pointer',
+    }}
+  >
+    {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+  </span>
+</div>
+
           <label className="label">
             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
           </label>
