@@ -6,12 +6,14 @@ import { FaRegEye,FaRegEyeSlash } from 'react-icons/fa';
 const Register = () => {
     const [registerError,setRegisterError]=useState('');
     const [showPassword,setShowPassword]=useState(false);
+    const [accepted,setAccepted]=useState(false);
     const handleRegister=e=>{
         
         e.preventDefault();
         const email=e.target.email.value;
         const password=e.target.password.value;
-        console.log(email,password);
+        const accepted=e.target.terms.checked;
+        console.log(email,password,accepted);
         setRegisterError('');
         createUserWithEmailAndPassword(auth,email,password)
         .then(result=>{
@@ -27,6 +29,10 @@ const Register = () => {
         }
         else if(!/[A-Z]/.test(password)){
             setRegisterError('There should be one upper case');
+            return;
+        }
+        else if(!accepted){
+            setRegisterError("Fisrt accept our terms and conditions");
             return;
         }
     }
@@ -71,9 +77,14 @@ const Register = () => {
   </span>
 </div>
 
-          <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+          <label >
+            <br />
+            <input className="mb-4" type="checkbox" name="terns" id="terms" />
+            <label htmlFor="terms" className="ml-2"><a href="">Accept terms and conditions</a></label>
+            <br />
+            
           </label>
+          <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
         </div>
         <div className="form-control mt-6">
           <button className="btn btn-primary">Register</button>
